@@ -300,4 +300,10 @@ public class BlogServiceImpl implements BlogService<BlogBean> {
 		message.put("isSuccess", result);
 		return message;
 	}
+
+	@Override
+	public List<Map<String, Object>> executeSQL(String sql, Object... params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

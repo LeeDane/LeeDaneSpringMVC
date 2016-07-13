@@ -160,6 +160,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						
+
+						request.setAttribute("param", "jeje");
+						return LoginInterceptor.NO_FILTER;
 					}else{
 						//设置为了防止过滤路径，直接在这里加载用户1为默认登录用户
 						try {
@@ -167,6 +171,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						
 					}
 					
 					//必须有免登陆验证码和账号

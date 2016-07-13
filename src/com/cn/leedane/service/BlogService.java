@@ -19,6 +19,14 @@ import com.cn.leedane.model.UserBean;
  */
 public interface BlogService <T extends IDBean>{
 	
+	/**
+	 * 执行SQL对应字段的List<Map<String,Object>
+	 * @param sql sql语句,参数直接写在语句中，存在SQL注入攻击de风险，慎用
+	 * @param params ?对应的值
+	 * @return
+	 */
+	public List<Map<String, Object>> executeSQL(String sql, Object ...params);
+	
 	public  Map<String,Object> addBlog(BlogBean blog) throws Exception;	
 	
 	/**
