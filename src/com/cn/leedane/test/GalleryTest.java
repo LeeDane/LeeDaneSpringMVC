@@ -313,7 +313,7 @@ public class GalleryTest extends BaseTest {
 	
 	@Test
 	public void getGallery(){
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		//String str = "{\"uid\": 1, \"pageSize\": 10, \"method\":\"lowloading\", \"last_id\":19, \"pic_size\":\"30x30\"}";
 		String str = "{'uid':1,'method':'firstloading','pageSize':10}";
 		JSONObject jo = JSONObject.fromObject(str);

@@ -81,10 +81,10 @@ public class SignInTest extends BaseTest {
 		if(!StringUtil.isNull(adminId)){
 			aid = Integer.parseInt(adminId);
 		}
-		UserBean user = userService.loadById(aid);
+		UserBean user = userService.findById(aid);
 		
 		if(user != null)
-			bean.setCreateUser(user);
+			bean.setCreateUserId(user.getId());
 		bean.setStatus(1);		
 		//System.out.println("签到："+signInService.saveSignIn(jo, user, request)(bean,1));
 	}
@@ -101,7 +101,7 @@ public class SignInTest extends BaseTest {
 	@Test
 	public void saveSignIn(){
 		
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		String str = "{\"account\":\"leedane\",\"login_mothod\":\"android\",\"no_login_code\":\"14480951808066e31568670e51be42bc7978cc2066ea060.521926355594616\"}";
 		JSONObject jo = JSONObject.fromObject(str);
 		try {
@@ -114,7 +114,7 @@ public class SignInTest extends BaseTest {
 	
 	@Test
 	public void getSignInByLimit(){
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		String str = "{'uid':1, 'pageSize':5,'timeScope':2, 'start_date': '2016-01-18', 'end_date':'2016-01-18'}";
 		JSONObject jo = JSONObject.fromObject(str);
 		try {

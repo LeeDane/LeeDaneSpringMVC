@@ -151,7 +151,7 @@ public class NotificationServiceImpl implements NotificationService<Notification
 			message.put("responseCode", EnumUtil.ResponseCode.操作对象不存在.value);
 			return message;
 		}
-		NotificationBean notificationBean = notificationMapper.findById(nid);
+		NotificationBean notificationBean = notificationMapper.findById(NotificationBean.class, nid);
 		
 		boolean result = false;
 		if(notificationBean != null){

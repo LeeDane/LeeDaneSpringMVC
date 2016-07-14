@@ -96,7 +96,7 @@ public class FriendServiceImpl implements FriendService<FriendBean> {
 			return message;			
 		}
 				
-		FriendBean friendBean = friendMapper.findById(fid);
+		FriendBean friendBean = friendMapper.findById(FriendBean.class, fid);
 		int toUserId = friendBean.getToUserId();
 		int fromUserId = friendBean.getFromUserId();
 		boolean result = false;
@@ -166,7 +166,7 @@ public class FriendServiceImpl implements FriendService<FriendBean> {
 		friendBean.setToUserId(toUserId);
 		friendBean.setAddIntroduce(JsonUtil.getStringValue(jo, "add_introduce"));
 		friendBean.setStatus(ConstantsUtil.STATUS_DISABLE);
-		friendBean.setCreateUser(user);
+		friendBean.setCreateUserId(user.getId());
 		friendBean.setCreateTime(new Date());
 		
 		if(StringUtil.isNotNull(JsonUtil.getStringValue(jo, "to_user_remark"))){
@@ -206,7 +206,7 @@ public class FriendServiceImpl implements FriendService<FriendBean> {
 			message.put("responseCode", EnumUtil.ResponseCode.缺少请求参数.value);
 			return message;	
 		}
-		FriendBean friendBean = friendMapper.findById(fid);
+		FriendBean friendBean = friendMapper.findById(FriendBean.class, fid);
 		if(friendBean == null){
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.好友关系不存在.value));
 			message.put("responseCode", EnumUtil.ResponseCode.好友关系不存在.value);
@@ -226,7 +226,7 @@ public class FriendServiceImpl implements FriendService<FriendBean> {
 		}
 		
 		friendBean.setStatus(ConstantsUtil.STATUS_NORMAL);
-		friendBean.setModifyUser(user);
+		friendBean.setModifyUserId(user.getId());
 		friendBean.setModifyTime(new Date());
 		String fromUserRemark = null;
 		if(StringUtil.isNotNull(JsonUtil.getStringValue(jo, "from_user_remark"))){

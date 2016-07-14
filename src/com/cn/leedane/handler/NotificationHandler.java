@@ -273,7 +273,7 @@ public class NotificationHandler {
 				bean.setCommentLevel(0);
 				bean.setContent(robotReply);
 				bean.setCreateTime(new Date());
-				bean.setCreateUser(robotUser);
+				bean.setCreateUserId(robotUser.getId());
 				bean.setPid(pid);
 				bean.setFroms("机器人自动回复");
 				bean.setStatus(ConstantsUtil.STATUS_NORMAL);

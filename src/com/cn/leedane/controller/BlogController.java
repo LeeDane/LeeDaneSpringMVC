@@ -121,7 +121,7 @@ public class BlogController extends BaseController{
 				
 			}
 			
-			blog.setCreateUser(user);
+			blog.setCreateUserId(user.getId());
 			blog.setCreateTime(new Date());
 			
 			if(hasDigest){

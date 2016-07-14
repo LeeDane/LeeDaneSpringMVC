@@ -137,7 +137,7 @@ public class AppFileUploadController extends BaseController{
            }else{
         	   UploadBean upload = new UploadBean();
         	   upload.setCreateTime(new Date());
-        	   upload.setCreateUser(user);
+        	   upload.setCreateUserId(user.getId());
         	   upload.setOrder(order);
         	   upload.setPath(fileFullPath.toString());
         	   upload.setSerialNumber(serialNumber);

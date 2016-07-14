@@ -43,9 +43,9 @@ public class SolrTest extends BaseTest{
 			 HttpSolrServer server = SolrHandler.getSolrInstance();
 			 List<BlogBean> list = new ArrayList<BlogBean>();
 			 
-			 list.add(blogMapper.findById(1510));
-			 list.add(blogMapper.findById(1511));
-			 list.add(blogMapper.findById(1512));
+			 list.add(blogMapper.findById(BlogBean.class, 1510));
+			 list.add(blogMapper.findById(BlogBean.class, 1511));
+			 list.add(blogMapper.findById(BlogBean.class, 1512));
 			 
 			 List<SolrInputDocument> documents = new ArrayList<SolrInputDocument>();
 			 SolrInputDocument document;

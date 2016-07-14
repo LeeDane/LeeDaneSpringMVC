@@ -14,14 +14,6 @@ import com.cn.leedane.model.OperateLogBean;
 public interface OperateLogMapper extends BaseMapper<OperateLogBean>{
 	
 	/**
-	 * 执行SQL对应字段的List<Map<String,Object>
-	 * @param sql sql语句,参数直接写在语句中，存在SQL注入攻击de风险，慎用
-	 * @param params ?对应的值
-	 * @return
-	 */
-	public List<Map<String, Object>> executeSQL(String sql, Object ...params);
-	
-	/**
 	 * 分页获取单表的全部字段的数据
 	 * 注意：1、这个只获取单表
 	 *      2、获取的是该表的全部字段

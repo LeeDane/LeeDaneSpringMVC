@@ -81,7 +81,7 @@ public class SanwenNetBean {
 		System.out.println(DateUtil.getSystemCurrentTime("yyyy-MM-dd HH:mm:ss") + ":Sanwen:deal()");
 		
 		//获得用户
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		List<CrawlBean> beans = crawlService.findAllNotCrawl(0, EnumUtil.WebCrawlType.散文网.value);
 		if(beans != null && beans.size()> 0){
 			List<Future<Boolean>> futures = new ArrayList<Future<Boolean>>();
@@ -144,7 +144,7 @@ public class SanwenNetBean {
 						BlogBean blog = new BlogBean();
 						blog.setTitle(title);
 						blog.setContent(content);
-						blog.setCreateUser(mUser);
+						blog.setCreateUserId(mUser.getId());
 						blog.setCreateTime(new Date());
 						blog.setSource(EnumUtil.WebCrawlType.散文网.value);
 						blog.setFroms("爬虫抓取");

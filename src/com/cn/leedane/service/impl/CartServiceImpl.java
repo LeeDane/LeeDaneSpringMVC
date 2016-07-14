@@ -33,9 +33,9 @@ public class CartServiceImpl implements CartService<CartBean>{
 	
 	@Override
 	public void addCart(){
-		UserBean user = userMapper.loadById(1);
+		UserBean user = userMapper.findById(UserBean.class, 1);
 		CartBean bean = new CartBean();
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setCreateTime(new Date());
 		
 		List<CartDetailsBean> ls = new ArrayList<CartDetailsBean>();

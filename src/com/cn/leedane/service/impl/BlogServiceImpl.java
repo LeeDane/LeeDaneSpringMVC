@@ -256,7 +256,7 @@ public class BlogServiceImpl implements BlogService<BlogBean> {
 			return message;
 		}
 		
-		BlogBean blogBean = blogMapper.findById(bid);
+		BlogBean blogBean = blogMapper.findById(BlogBean.class, bid);
 		
 		if(blogBean == null){
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.该博客不存在.value));

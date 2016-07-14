@@ -3,7 +3,6 @@ package com.cn.leedane.mapper;
 import java.util.List;
 
 import com.cn.leedane.model.CrawlBean;
-import com.cn.leedane.model.OptionBean;
 /**
  * 爬虫mapper接口类
  * @author LeeDane

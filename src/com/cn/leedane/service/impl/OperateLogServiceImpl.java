@@ -54,7 +54,11 @@ public class OperateLogServiceImpl implements OperateLogService<OperateLogBean>{
 		}
 		
 		if(user != null){
-			operateLogBean.setCreateUser(user);
+			operateLogBean.setCreateUserId(user.getId());
+			operateLogBean.setModifyUserId(user.getId());
+			operateLogBean.setCreateTime(createTime == null ? DateUtil.stringToDate(
+					DateUtil.getSystemCurrentTime(DateUtil.DEFAULT_DATE_FORMAT),
+					DateUtil.DEFAULT_DATE_FORMAT) : createTime);
 		}
 				
 		operateLogBean.setCreateTime(createTime == null ? DateUtil.stringToDate(

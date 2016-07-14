@@ -9,7 +9,5 @@ import com.cn.leedane.model.UserRoleBean;
  * Version 1.0
  */
 public interface UserRoleMapper extends BaseMapper<UserRoleBean>{
-
-	
 	
 }

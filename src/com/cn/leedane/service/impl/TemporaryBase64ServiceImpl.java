@@ -41,7 +41,7 @@ public class TemporaryBase64ServiceImpl implements TemporaryBase64Service<Tempor
 		TemporaryBase64Bean base64Bean = new TemporaryBase64Bean();
 		base64Bean.setContent(content);
 		base64Bean.setCreateTime(new Date());
-		base64Bean.setCreateUser(user);
+		base64Bean.setCreateUserId(user.getId());
 		base64Bean.setEnd(end);
 		base64Bean.setOrder(order);
 		base64Bean.setTableName(DataTableType.心情.value);

@@ -8,11 +8,7 @@
  -->
 <mapper namespace="com.cn.leedane.mapper.UserMapper">
 
-	 <!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 -->  
-	<select id="findById" parameterType="int" resultType="UserBean">
-		select id,account,age from t_user where id=#{id}
-	</select>
-	
+	<!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 -->  
 	<select id="findAll" resultType="UserBean">
 		select id,account,age, date_format(register_time,'%Y-%c-%d %H:%i:%s') registerTime from t_user
 	</select>

@@ -1,5 +1,8 @@
 package com.cn.leedane.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
@@ -30,6 +33,12 @@ public interface BaseMapper<T> {
     @UpdateProvider(type = SqlProvider.class, method = "update")
     public int update(T bean);
 
-    @SelectProvider(type = SqlProvider.class, method = "findFirst")
-    public T findFirst(T bean);
+    /*@SelectProvider(type = SqlProvider.class, method = "findFirst")
+    public T findFirst(T bean);*/
+    
+    @SelectProvider(type = SqlProvider.class, method = "findById")
+    public T findById(Class<T> clazz, int id);
+    
+    @SelectProvider(type = SqlProvider.class, method = "executeSQL")
+    public List<Map<String, Object>> executeSQL(String sql, Object ...params);
 }

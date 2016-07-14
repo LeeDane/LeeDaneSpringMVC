@@ -84,7 +84,7 @@ public class JPushTest extends BaseTest{
 		chatBean.setId(1107);
 		chatBean.setContent("测试内容1");
 		chatBean.setCreateTime(new Date());
-		chatBean.setCreateUser(user);
+		chatBean.setCreateUserId(user.getId());
 		chatBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		chatBean.setToUserId(1);
 		chatBean.setType(1);

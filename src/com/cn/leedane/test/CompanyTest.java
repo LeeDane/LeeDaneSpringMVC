@@ -36,11 +36,11 @@ public class CompanyTest extends BaseTest {
 	
 	@Test
 	public void addCompany() throws Exception{
-		UserBean user = userService.loadById(1);
-		UserBean user2 = userService.loadById(2);
-		UserBean user3 = userService.loadById(3);
-		UserBean user4 = userService.loadById(4);
-		UserBean user5 = userService.loadById(5);
+		UserBean user = userService.findById(1);
+		UserBean user2 = userService.findById(2);
+		UserBean user3 = userService.findById(3);
+		UserBean user4 = userService.findById(4);
+		UserBean user5 = userService.findById(5);
 		
 		Set<UserBean> custome1 = new HashSet<UserBean>();
 		custome1.add(user2);
@@ -54,7 +54,7 @@ public class CompanyTest extends BaseTest {
 		company1.setAddress("广东省深圳市宝安区");
 		company1.setBoss("任正非");
 		company1.setCompanyCreateTime(DateUtil.stringToDate("1983-01-11 00:00:00"));
-		company1.setCreateUser(user);
+		company1.setCreateUserId(user.getId());
 		company1.setCreateTime(new Date());
 		company1.setCredit(3);
 		company1.setEmployee(100000);
@@ -71,7 +71,7 @@ public class CompanyTest extends BaseTest {
 		company2.setAddress("广东省珠海市某区");
 		company2.setBoss("黄章");
 		company2.setCompanyCreateTime(DateUtil.stringToDate("2003-05-21 00:00:00"));
-		company2.setCreateUser(user);
+		company2.setCreateUserId(user.getId());
 		company2.setCreateTime(new Date());
 		company2.setCredit(4);
 		company2.setEmployee(20000);
@@ -87,6 +87,6 @@ public class CompanyTest extends BaseTest {
 	
 	@Test
 	public void lodById(){
-		companyMapper.findById(1);
+		companyMapper.findById(CompanyBean.class, 1);
 	}
 }

@@ -30,7 +30,7 @@ public class ChatTest extends BaseTest {
 	
 	@Test
 	public void sendChat(){
-		UserBean user = userService.loadById(5);
+		UserBean user = userService.findById(5);
 		String str = "{\"toUserId\":\"1\",\"content\":\"锄禾日当午，汗滴禾下土，谁知盘中餐，粒粒皆辛苦。---李白\"}";
 		JSONObject jo = JSONObject.fromObject(str);
 		try {

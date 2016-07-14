@@ -49,12 +49,12 @@ public class ProductTest extends BaseTest {
 		if(!StringUtil.isNull(adminId)){
 			aid = Integer.parseInt(adminId);
 		}
-		UserBean user = userService.loadById(aid);
-		CompanyBean company1 = companyMapper.findById(1);
-		CompanyBean company2 = companyMapper.findById(2);
+		UserBean user = userService.findById(aid);
+		CompanyBean company1 = companyMapper.findById(CompanyBean.class, 1);
+		CompanyBean company2 = companyMapper.findById(CompanyBean.class, 2);
 		
 		ProductBean product1 = new ProductBean();
-		product1.setCreateUser(user);
+		product1.setCreateUserId(user.getId());
 		product1.setArea("广东深圳");
 		product1.setName("华为手机");
 		product1.setCode("SB10001");
@@ -69,7 +69,7 @@ public class ProductTest extends BaseTest {
 		product1.setNumber(100000);
 		
 		ProductBean product2 = new ProductBean();
-		product2.setCreateUser(user);
+		product2.setCreateUserId(user.getId());
 		product2.setArea("广东珠海");
 		product2.setName("魅族手机");
 		product2.setCode("TH10001");

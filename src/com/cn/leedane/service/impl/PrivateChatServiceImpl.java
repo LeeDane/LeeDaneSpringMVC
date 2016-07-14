@@ -89,7 +89,7 @@ public class PrivateChatServiceImpl implements PrivateChatService<PrivateChatBea
 		PrivateChatBean privateChatBean = new PrivateChatBean();
 		privateChatBean.setContent(content);
 		privateChatBean.setCreateTime(new Date());
-		privateChatBean.setCreateUser(user);
+		privateChatBean.setCreateUserId(user.getId());
 		privateChatBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		privateChatBean.setToUserId(toUserId);
 		privateChatBean.setType(type);
@@ -125,7 +125,7 @@ public class PrivateChatServiceImpl implements PrivateChatService<PrivateChatBea
 	public static Map<String, Object> privateChatBeanToMap(PrivateChatBean privateChatBean){
 		Map<String, Object> chat = new HashMap<String, Object>();
 		chat.put("id", privateChatBean.getId());
-		chat.put("create_user_id", privateChatBean.getCreateUser().getId());
+		chat.put("create_user_id", privateChatBean.getCreateUserId());
 		chat.put("to_user_id", privateChatBean.getToUserId());
 		chat.put("create_time", DateUtil.DateToString(privateChatBean.getCreateTime()));
 		chat.put("type", privateChatBean.getType());

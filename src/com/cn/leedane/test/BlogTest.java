@@ -46,7 +46,7 @@ public class BlogTest extends BaseTest {
 		blog.setTitle("测试标题2");
 		blog.setContent("这是测试信息2。。。。。。。。。。");
 		//optionService.loadById(1);
-		blog.setCreateUser(userService.loadById(12));
+		blog.setCreateUserId(userService.findById(12).getId());
 		//operateLogService.loadById(1);
 		blog.setCreateTime(new Date());
 		blogMapper.save(blog);
@@ -54,7 +54,7 @@ public class BlogTest extends BaseTest {
 	
 	@Test
 	public void loadByOneBlog() {
-		BlogBean bean = blogMapper.findById(3);
+		BlogBean bean = blogMapper.findById(BlogBean.class, 3);
 		System.out.println(bean);
 	}
 	
@@ -75,7 +75,7 @@ public class BlogTest extends BaseTest {
 		
 		for(int i = 0; i < count; i++){
 			try{
-				BlogBean bean = blogMapper.findById(StringUtil.changeObjectToInt(idList.get(i).get("id")));
+				BlogBean bean = blogMapper.findById(BlogBean.class, StringUtil.changeObjectToInt(idList.get(i).get("id")));
 				if(StringUtil.isNull(bean.getDigest())){
 					String digest = JsoupUtil.getInstance().getDigest(bean.getContent(), 0, 120);
 					bean.setDigest(digest);

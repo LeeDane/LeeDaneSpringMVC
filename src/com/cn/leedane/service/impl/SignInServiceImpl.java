@@ -125,7 +125,7 @@ public class SignInServiceImpl implements SignInService<SignInBean> {
 		
 		signInBean.setCreateTime(currentTime);
 		signInBean.setCreateDate(DateUtil.DateToString(currentTime, "yyyy-MM-dd"));
-		signInBean.setCreateUser(user);
+		signInBean.setCreateUserId(user.getId());
 		signInBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		
 		boolean isSave = signInMapper.save(signInBean, uid);
@@ -133,7 +133,7 @@ public class SignInServiceImpl implements SignInService<SignInBean> {
 			scoreBean.setTotalScore(StringUtil.getScoreBySignin(continuous, score));
 			scoreBean.setScore(StringUtil.getScoreBySignin(continuous));
 			scoreBean.setCreateTime(currentTime);
-			scoreBean.setCreateUser(user);
+			scoreBean.setCreateUserId(user.getId());
 			scoreBean.setDesc("用户签到");
 			scoreBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 			scoreBean.setTableId(signInBean.getId());

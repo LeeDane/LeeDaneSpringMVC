@@ -60,7 +60,7 @@ public interface UserService<T extends IDBean>{
 	/**
 	 * 通过Id找到对应的User
 	 */
-	public UserBean loadById(int Uid);
+	//public UserBean loadById(int Uid);
 	
 	/**
 	 * 

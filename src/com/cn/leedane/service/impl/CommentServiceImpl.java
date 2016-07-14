@@ -109,7 +109,7 @@ public class CommentServiceImpl implements CommentService<CommentBean>{
 		bean.setCommentLevel(level);
 		bean.setContent(content);
 		bean.setCreateTime(new Date());
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setPid(pid);
 		bean.setFroms(from);
 		bean.setStatus(ConstantsUtil.STATUS_NORMAL);
@@ -463,8 +463,8 @@ public class CommentServiceImpl implements CommentService<CommentBean>{
 		}
 		
 		boolean result = false;
-		CommentBean commentBean = commentMapper.findById(cid);
-		if(commentBean != null && commentBean.getCreateUser().getId() == createUserId){
+		CommentBean commentBean = commentMapper.findById(CommentBean.class, cid);
+		if(commentBean != null && commentBean.getCreateUserId() == createUserId){
 			result = commentMapper.delete(commentBean) > 0;
 		}else{
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.操作对象不存在.value));

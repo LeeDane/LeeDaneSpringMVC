@@ -71,7 +71,7 @@ public class ReportServiceImpl implements ReportService<ReportBean>{
 		}
 		ReportBean bean = new ReportBean();
 		bean.setCreateTime(new Date());
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		bean.setTableName(tableName);
 		bean.setTableId(tableId);

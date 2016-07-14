@@ -15,6 +15,7 @@ import com.cn.leedane.model.CartDetailsBean;
 import com.cn.leedane.model.ProductBean;
 import com.cn.leedane.model.UserBean;
 import com.cn.leedane.service.CartDetailsService;
+import com.cn.leedane.utils.EnumUtil.DataTableType;
 /**
  * 购物车清单service的实现类
  * @author LeeDane
@@ -33,9 +34,9 @@ public class CartDetailsServiceImpl implements CartDetailsService<CartDetailsBea
 	
 	@Override
 	public void addCartDetails(){
-		UserBean user = userMapper.loadById(1);
+		UserBean user = userMapper.findById(UserBean.class, 1);
 		CartBean bean = new CartBean();
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setCreateTime(new Date());
 		
 		List<CartDetailsBean> ls = new ArrayList<CartDetailsBean>();

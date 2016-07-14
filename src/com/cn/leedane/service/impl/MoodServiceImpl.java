@@ -141,7 +141,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 		moodBean.setFroms(JsonUtil.getStringValue(jsonObject, "froms"));
 		moodBean.setPublishNow(true);
 		moodBean.setStatus(status);
-		moodBean.setCreateUser(user);
+		moodBean.setCreateUserId(user.getId());
 		String uuid = UUID.randomUUID().toString() + System.currentTimeMillis();
 		moodBean.setUuid(uuid);
 		
@@ -225,7 +225,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 			message.put("responseCode", EnumUtil.ResponseCode.操作对象不存在.value);
 			return message;
 		}
-		MoodBean moodBean = moodMapper.findById(mid);
+		MoodBean moodBean = moodMapper.findById(MoodBean.class, mid);
 		String tableUuid = moodBean.getUuid();
 		//有图片的先删掉图片
 		if(moodBean != null && moodBean.isHasImg()){
@@ -368,7 +368,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 			moodBean.setLatitude(latitude);
 		}
 		moodBean.setCreateTime(new Date());
-		moodBean.setCreateUser(user);
+		moodBean.setCreateUserId(user.getId());
 		moodBean.setFroms(froms);
 		moodBean.setHasImg(hasImg);
 		moodBean.setPublishNow(true);
@@ -478,7 +478,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 		moodBean.setFroms(JsonUtil.getStringValue(jsonObject, "froms"));
 		moodBean.setPublishNow(true);
 		moodBean.setStatus(ConstantsUtil.STATUS_NORMAL);
-		moodBean.setCreateUser(user);
+		moodBean.setCreateUserId(user.getId());
 		moodBean.setUuid(uuid);
 		moodBean.setCanComment(JsonUtil.getBooleanValue(jsonObject, "can_comment", true));
 		moodBean.setCanTransmit(JsonUtil.getBooleanValue(jsonObject, "can_transmit", true));
@@ -496,7 +496,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 			TimeLineBean timeLineBean = new TimeLineBean();
 			timeLineBean.setContent(moodBean.getContent());
 			timeLineBean.setCreateTime(DateUtil.DateToString(new Date()));
-			timeLineBean.setCreateUserId(moodBean.getCreateUser().getId());
+			timeLineBean.setCreateUserId(moodBean.getCreateUserId());
 			timeLineBean.setFroms(moodBean.getFroms());
 			timeLineBean.setSource(null);
 			timeLineBean.setHasSource(false);
@@ -567,7 +567,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 				if(width > 0 && height > 0){
 					filePathBean = new FilePathBean();
 					filePathBean.setCreateTime(new Date());
-					filePathBean.setCreateUser(user);
+					filePathBean.setCreateUserId(user.getId());
 					filePathBean.setOrder(i);
 					filePathBean.setPath(StringUtil.getFileName(linkArray[i]));
 					filePathBean.setQiniuPath(linkArray[i]);
@@ -599,7 +599,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 			moodBean.setFroms(JsonUtil.getStringValue(jsonObject, "froms"));
 			moodBean.setPublishNow(true);
 			moodBean.setStatus(ConstantsUtil.STATUS_NORMAL);
-			moodBean.setCreateUser(user);
+			moodBean.setCreateUserId(user.getId());
 			moodBean.setCanComment(JsonUtil.getBooleanValue(jsonObject, "can_comment", true));
 			moodBean.setCanTransmit(JsonUtil.getBooleanValue(jsonObject, "can_transmit", true));
 			moodBean.setHasImg(true);
@@ -610,7 +610,7 @@ public class MoodServiceImpl implements MoodService<MoodBean> {
 				TimeLineBean timeLineBean = new TimeLineBean();
 				timeLineBean.setContent(moodBean.getContent());
 				timeLineBean.setCreateTime(DateUtil.DateToString(new Date()));
-				timeLineBean.setCreateUserId(moodBean.getCreateUser().getId());
+				timeLineBean.setCreateUserId(moodBean.getCreateUserId());
 				timeLineBean.setFroms(moodBean.getFroms());
 				timeLineBean.setSource(null);
 				timeLineBean.setHasSource(false);

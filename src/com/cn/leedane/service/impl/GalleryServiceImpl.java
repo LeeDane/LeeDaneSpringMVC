@@ -85,7 +85,7 @@ public class GalleryServiceImpl implements GalleryService<GalleryBean> {
 			}
 		}
 		GalleryBean bean = new GalleryBean();
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setCreateTime(new Date());
 		bean.setDesc(desc);
 		bean.setHeight(height);
@@ -121,7 +121,7 @@ public class GalleryServiceImpl implements GalleryService<GalleryBean> {
 			message.put("responseCode", EnumUtil.ResponseCode.某些参数为空.value);
 			return message;
 		}
-		GalleryBean galleryBean = galleryMapper.findById(galleryId);
+		GalleryBean galleryBean = galleryMapper.findById(GalleryBean.class, galleryId);
 		if(galleryBean == null){
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.操作对象不存在.value));
 			message.put("responseCode", EnumUtil.ResponseCode.操作对象不存在.value);

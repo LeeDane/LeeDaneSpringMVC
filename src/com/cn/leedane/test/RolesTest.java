@@ -22,7 +22,7 @@ public class RolesTest extends BaseTest {
 	
 	@Test
 	public void addCompany() throws Exception{
-		RolesBean roles = rolesMapper.loadById(1);
+		RolesBean roles = rolesMapper.findById(RolesBean.class, 1);
 		rolesMapper.save(roles);
 	}	
 }

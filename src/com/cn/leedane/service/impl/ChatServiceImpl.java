@@ -129,7 +129,7 @@ public class ChatServiceImpl implements ChatService<ChatBean> {
 		ChatBean chatBean = new ChatBean();
 		chatBean.setContent(content);
 		chatBean.setCreateTime(new Date());
-		chatBean.setCreateUser(user);
+		chatBean.setCreateUserId(user.getId());
 		chatBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		chatBean.setToUserId(toUserId);
 		chatBean.setType(type);
@@ -163,7 +163,7 @@ public class ChatServiceImpl implements ChatService<ChatBean> {
 	public static Map<String, Object> chatBeanToMap(ChatBean chatBean){
 		Map<String, Object> chat = new HashMap<String, Object>();
 		chat.put("id", chatBean.getId());
-		chat.put("create_user_id", chatBean.getCreateUser().getId());
+		chat.put("create_user_id", chatBean.getCreateUserId());
 		chat.put("to_user_id", chatBean.getToUserId());
 		chat.put("create_time", DateUtil.DateToString(chatBean.getCreateTime()));
 		chat.put("type", chatBean.getType());
@@ -190,7 +190,7 @@ public class ChatServiceImpl implements ChatService<ChatBean> {
 		ChatBean chatBean = null;
 		boolean result = false;
 		for(String cid: cidArray){
-			chatBean = chatMapper.findById(StringUtil.changeObjectToInt(cid));
+			chatBean = chatMapper.findById(ChatBean.class, StringUtil.changeObjectToInt(cid));
 			if(chatBean != null){
 				chatBean.setRead(true);
 				result = chatMapper.update(chatBean) > 0;
@@ -239,7 +239,7 @@ public class ChatServiceImpl implements ChatService<ChatBean> {
 			message.put("responseCode", EnumUtil.ResponseCode.缺少请求参数.value);
 			return message;
 		}
-		ChatBean chatBean = chatMapper.findById(cid);
+		ChatBean chatBean = chatMapper.findById(ChatBean.class, cid);
 		String content = "";
 		boolean result = false;
 		if(chatBean != null){

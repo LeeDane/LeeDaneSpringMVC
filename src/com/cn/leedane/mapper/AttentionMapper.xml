@@ -9,10 +9,6 @@
 <mapper namespace="com.cn.leedane.mapper.AttentionMapper">
 	
 	 <!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 -->  
-	<select id="findById" parameterType="int" resultType="AttentionBean">
-		select id,status,create_time createTime,modify_time modifyTime,create_user_id createUserId,modify_user_id modifyUserId,table_id tableId,table_name tableName from t_attention where id=#{id}
-	</select>
-	
 	<select id="getLimit" parameterType="java.util.Map" resultType="AttentionBean">
 		<if test="method == 'firstloading'">
 			select a.id, a.table_name, a.table_id, a.create_user_id, u.account, date_format(a.create_time,'%Y-%c-%d %H:%i:%s') create_time from t_attention  a inner join t_user  u on u.id = a.create_user_id 

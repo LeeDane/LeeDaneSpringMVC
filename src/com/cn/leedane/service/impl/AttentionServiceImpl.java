@@ -14,10 +14,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cn.leedane.utils.ConstantsUtil;
-import com.cn.leedane.utils.EnumUtil;
-import com.cn.leedane.utils.JsonUtil;
-import com.cn.leedane.utils.StringUtil;
 import com.cn.leedane.handler.CommonHandler;
 import com.cn.leedane.handler.FriendHandler;
 import com.cn.leedane.handler.UserHandler;
@@ -27,6 +23,11 @@ import com.cn.leedane.model.OperateLogBean;
 import com.cn.leedane.model.UserBean;
 import com.cn.leedane.service.AttentionService;
 import com.cn.leedane.service.OperateLogService;
+import com.cn.leedane.utils.ConstantsUtil;
+import com.cn.leedane.utils.EnumUtil;
+import com.cn.leedane.utils.EnumUtil.DataTableType;
+import com.cn.leedane.utils.JsonUtil;
+import com.cn.leedane.utils.StringUtil;
 /**
  * 关注service的实现类
  * @author LeeDane
@@ -77,7 +78,7 @@ public class AttentionServiceImpl implements AttentionService<AttentionBean>{
 		}
 		AttentionBean bean = new AttentionBean();
 		bean.setCreateTime(new Date());
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		bean.setTableName(tableName);
 		bean.setTableId(tableId);
@@ -120,7 +121,7 @@ public class AttentionServiceImpl implements AttentionService<AttentionBean>{
 		}
 		
 		boolean result = false;
-		AttentionBean attentionBean = attentionMapper.findById(aid);
+		AttentionBean attentionBean = attentionMapper.findById(AttentionBean.class, aid);
 		if(attentionBean != null && attentionBean.getCreateUserId() == createUserId){
 			result = attentionMapper.delete(attentionBean) > 0;
 		}else{
@@ -152,16 +153,7 @@ public class AttentionServiceImpl implements AttentionService<AttentionBean>{
 		List<Map<String, Object>> rs = new ArrayList<Map<String,Object>>();
 		//查找该用户所有的关注(该用户必须是登录用户)
 		if(toUserId > 0 && toUserId == user.getId()){		
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("toUserId", toUserId);
-			params.put("status", ConstantsUtil.STATUS_NORMAL);
-			params.put("pageSize", pageSize);
-			params.put("lastId", lastId);
-			params.put("firstId", firstId);
-			params.put("method", method);
-			rs = attentionMapper.getLimit(params);
-			
-			/*if("firstloading".equalsIgnoreCase(method)){
+			if("firstloading".equalsIgnoreCase(method)){
 				sql.append("select a.id, a.table_name, a.table_id, a.create_user_id, u.account, date_format(a.create_time,'%Y-%c-%d %H:%i:%s') create_time ");
 				sql.append(" from "+DataTableType.关注.value+" a inner join "+DataTableType.用户.value+" u on u.id = a.create_user_id where a.create_user_id = ? and a.status = ? ");
 				sql.append(" order by a.id desc limit 0,?");
@@ -178,7 +170,7 @@ public class AttentionServiceImpl implements AttentionService<AttentionBean>{
 				sql.append(" from "+DataTableType.关注.value+" a inner join "+DataTableType.用户.value+" u on u.id = a.create_user_id where a.create_user_id = ? and a.status = ? ");
 				sql.append(" and a.id > ? limit 0,?  ");
 				rs = attentionMapper.executeSQL(sql.toString() , toUserId, ConstantsUtil.STATUS_NORMAL, firstId, pageSize);
-			}*/
+			}
 		}
 		
 		//查找该用户指定表的数据

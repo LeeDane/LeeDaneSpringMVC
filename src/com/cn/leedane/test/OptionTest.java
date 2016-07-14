@@ -33,7 +33,7 @@ public class OptionTest extends BaseTest{
 	@Test
 	public void testUpdate() throws Exception{
 		
-		OptionBean bean = optionMapper.loadById(1);
+		OptionBean bean = optionMapper.findById(OptionBean.class, 1);
 		bean.setVersion(3);
 		optionMapper.update(bean);
 	}

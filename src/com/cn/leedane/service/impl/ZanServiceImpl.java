@@ -89,7 +89,7 @@ public class ZanServiceImpl implements ZanService<ZanBean>{
 		}
 		ZanBean bean = new ZanBean();
 		bean.setCreateTime(new Date());
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		bean.setTableName(tableName);
 		bean.setTableId(tableId);
@@ -223,8 +223,8 @@ public class ZanServiceImpl implements ZanService<ZanBean>{
 		}
 		
 		boolean result = false;
-		ZanBean zanBean = zanMapper.findById(zid);
-		if(zanBean != null && zanBean.getCreateUser().getId() == createUserId){
+		ZanBean zanBean = zanMapper.findById(ZanBean.class, zid);
+		if(zanBean != null && zanBean.getCreateUserId() == createUserId){
 			result = zanMapper.delete(zanBean) > 0;
 		}else{
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.操作对象不存在.value));

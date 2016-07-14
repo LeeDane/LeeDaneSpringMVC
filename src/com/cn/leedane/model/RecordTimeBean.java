@@ -2,6 +2,8 @@ package com.cn.leedane.model;
 
 import java.util.Date;
 
+import com.cn.leedane.mybatis.table.annotation.Column;
+
 /**
  * 记录时间的基类
  * @author LeeDane
@@ -16,25 +18,31 @@ public abstract class RecordTimeBean extends StatusBean{
 	/**
 	 * 创建时间
 	 */
+	@Column("create_time")
 	private Date createTime;
 	
 	/**
 	 * 创建作者(人)
 	 */
-	private UserBean createUser;
+	/*@Column("create_user")
+	private UserBean createUser;*/
 	
+	@Column("create_user_id")
 	private int createUserId;
 	
 	/**
 	 * 最后修改时间
 	 */
+	@Column("modify_time")
 	private Date modifyTime; 
 	
 	/**
 	 * 最后修改者(人)
 	 */
-	private UserBean modifyUser; 
+	/*@Column("modify_user")
+	private UserBean modifyUser; */
 	
+	@Column("modify_user_id")
 	private int modifyUserId;
 	
 	//@Column(name="create_time")
@@ -48,12 +56,12 @@ public abstract class RecordTimeBean extends StatusBean{
 	
 	//@ManyToOne(targetEntity = UserBean.class)
 	//@JoinColumn(name="create_user_id", referencedColumnName="id")//外键为create_user_id，与user中的id关联
-	public UserBean getCreateUser() {
+	/*public UserBean getCreateUser() {
 		return createUser;
 	}
 	public void setCreateUser(UserBean createUser) {
 		this.createUser = createUser;
-	}
+	}*/
 	//@Column(name="modify_time")
 	//@JSON(format = "yyyy-MM-dd HH:mm:ss")
 	public Date getModifyTime() {
@@ -65,12 +73,12 @@ public abstract class RecordTimeBean extends StatusBean{
 	
 	//@ManyToOne(targetEntity = UserBean.class)
 	//@JoinColumn(name="modify_user_id", referencedColumnName="id")//外键为create_user_id，与user中的id关联
-	public UserBean getModifyUser() {
+	/*public UserBean getModifyUser() {
 		return modifyUser;
 	}
 	public void setModifyUser(UserBean modifyUser) {
 		this.modifyUser = modifyUser;
-	}
+	}*/
 	public int getCreateUserId() {
 		return createUserId;
 	}

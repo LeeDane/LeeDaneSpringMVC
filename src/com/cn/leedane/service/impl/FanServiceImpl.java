@@ -403,7 +403,7 @@ public class FanServiceImpl implements FanService<FanBean> {
 		FanBean fanBean = new FanBean();
 		fanBean.setToUserId(toUserId);
 		fanBean.setStatus(ConstantsUtil.STATUS_NORMAL);
-		fanBean.setCreateUser(user);
+		fanBean.setCreateUserId(user.getId());
 		fanBean.setCreateTime(new Date());
 		fanBean.setRemark(remark);
 		

@@ -102,7 +102,7 @@ public class TransmitServiceImpl implements TransmitService<TransmitBean>{
 
 		TransmitBean bean = new TransmitBean();
 		bean.setCreateTime(new Date());
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		bean.setTableName(tableName);
 		bean.setTableId(tableId);
@@ -205,8 +205,8 @@ public class TransmitServiceImpl implements TransmitService<TransmitBean>{
 		}
 		
 		boolean result = false;
-		TransmitBean transmitBean = transmitMapper.findById(tid);
-		if(transmitBean != null && transmitBean.getCreateUser().getId() == createUserId){
+		TransmitBean transmitBean = transmitMapper.findById(TransmitBean.class, tid);
+		if(transmitBean != null && transmitBean.getCreateUserId() == createUserId){
 			result = transmitMapper.delete(transmitBean) > 0;
 		}else{
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.操作对象不存在.value));

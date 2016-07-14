@@ -66,7 +66,7 @@ public class CollectionServiceImpl implements CollectionService<CollectionBean>{
 		}
 		CollectionBean bean = new CollectionBean();
 		bean.setCreateTime(new Date());
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		bean.setTableName(tableName);
 		bean.setTableId(tableId);
@@ -97,8 +97,8 @@ public class CollectionServiceImpl implements CollectionService<CollectionBean>{
 		}
 		
 		boolean result = false;
-		CollectionBean collectionBean = collectionMapper.findById(cid);
-		if(collectionBean != null && collectionBean.getCreateUser().getId() == createUserId){
+		CollectionBean collectionBean = collectionMapper.findById(CollectionBean.class, cid);
+		if(collectionBean != null && collectionBean.getCreateUserId() == createUserId){
 			result = collectionMapper.delete(collectionBean) > 0;
 		}else{
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.操作对象不存在.value));

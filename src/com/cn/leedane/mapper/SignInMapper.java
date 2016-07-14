@@ -13,14 +13,6 @@ import com.cn.leedane.model.SignInBean;
  */
 public interface SignInMapper extends BaseMapper<SignInBean>{
 	/**
-	 * 执行SQL对应字段的List<Map<String,Object>
-	 * @param sql sql语句,参数直接写在语句中，存在SQL注入攻击de风险，慎用
-	 * @param params ?对应的值
-	 * @return
-	 */
-	public List<Map<String, Object>> executeSQL(String sql, Object ...params);
-	
-	/**
 	 * 用户指定时间是否已经签到
 	 * @param userId 用户ID
 	 * @param dateTime 指定的日期

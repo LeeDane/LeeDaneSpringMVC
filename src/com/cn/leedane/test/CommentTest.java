@@ -37,7 +37,7 @@ public class CommentTest extends BaseTest {
 	@Test
 	public void publish() throws Exception{
 		long start = System.currentTimeMillis();
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		
 		String str = "{\"table_name\":\""+DataTableType.心情.value+"\", \"table_id\":1104, \"content\":\"谢谢，你也是！\", \"cid\":0}";
 		
@@ -53,7 +53,7 @@ public class CommentTest extends BaseTest {
 	
 	@Test
 	public void getCommentByLimit(){
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		
 		String str = "{\"table_name\":\""+DataTableType.心情.value+"\", \"table_id\":1,\"pageSize\":5,\"first_id\": 2, \"last_id\":2, \"method\":\"firstloading\"}";
 		JSONObject jo = JSONObject.fromObject(str);
@@ -73,7 +73,7 @@ public class CommentTest extends BaseTest {
 	
 	@Test
 	public void getOneCommentItemsByLimit(){
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		
 		String str = "{\"table_name\":\""+DataTableType.心情.value+"\", \"cid\":1, \"table_id\":1,\"first_id\": 2, \"last_id\":2, \"method\":\"firstloading\"}";
 		JSONObject jo = JSONObject.fromObject(str);
@@ -92,7 +92,7 @@ public class CommentTest extends BaseTest {
 	
 	@Test
 	public void getCommentsCount(){
-		UserBean user = userService.loadById(1);
+		UserBean user = userService.findById(1);
 		
 		String str = "{\"table_name\":\""+DataTableType.心情.value+"\", \"table_id\":1}";
 		JSONObject jo = JSONObject.fromObject(str);

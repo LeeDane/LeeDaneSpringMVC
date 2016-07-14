@@ -1,6 +1,8 @@
 package com.cn.leedane.model;
 import java.util.Date;
 
+import com.cn.leedane.mybatis.table.annotation.Column;
+
 /**
  * 用户实体类
  * @author LeeDane
@@ -30,6 +32,7 @@ public class UserBean extends StatusBean{
 	/**
 	 * 中文名
 	 */
+	@Column("china_name")
 	private String chinaName;
 	
 	/**
@@ -40,6 +43,7 @@ public class UserBean extends StatusBean{
 	/**
 	 * 真实姓名
 	 */
+	@Column("real_name")
 	private String realName; 
 	
 	/**
@@ -65,11 +69,13 @@ public class UserBean extends StatusBean{
 	/**
 	 * 籍贯
 	 */
+	@Column("native_place")
 	private String nativePlace;
 	
 	/**
 	 * 最高学历
 	 */
+	@Column("education_background")
 	private String educationBackground; 
 	
 	/**
@@ -85,6 +91,7 @@ public class UserBean extends StatusBean{
 	/**
 	 * 公司地址
 	 */
+	@Column("company_address")
 	private String companyAddress;  
 	
 	/**
@@ -95,32 +102,37 @@ public class UserBean extends StatusBean{
 	/**
 	 * 手机号码，格式：137XXXXXXXXXXX
 	 */
+	@Column("mobile_phone")
 	private String mobilePhone;  
 	
 	/**
 	 * 家庭座机电话，格式如020-1234567
 	 */
+	@Column("home_phone")
 	private String homePhone; 
 	
 	/**
 	 * 公司电话号码
 	 */
+	@Column("company_phone")
 	private String companyPhone; 
 	
 	/**
 	 * 生日，格式2014-06-25 00:00:00
 	 */
+	@Column("birth_day")
 	private Date birthDay;  
 	
 	/**
 	 * 保存照片的相对路径(开发时选择绝对路径)
 	 */
+	@Column("pic_path")
 	private String picPath;
 	
 	/**
 	 * 照片的base64位(开发时选择绝对路径)
 	 */
-	
+	@Column("pic_base64")
 	private String picBase64;
 	
 	/**
@@ -136,16 +148,19 @@ public class UserBean extends StatusBean{
 	/**
 	 * 身份证号码
 	 */
+	@Column("id_card")
 	private String idCard;
 	
 	/**
 	 * 个人介绍
 	 */
+	@Column("personal_introduction")
 	private String personalIntroduction; 
 	
 	/**
 	 * 保存注册的注册码
 	 */
+	@Column("register_code")
 	private String registerCode;
 	
 	/**
@@ -156,26 +171,31 @@ public class UserBean extends StatusBean{
 	/**
 	 * 注册时间，格式2014-06-25 10:00:00
 	 */
+	@Column("register_time")
 	private Date registerTime;
 	
 	/**
 	 * 免登陆验证码
 	 */
+	@Column("no_login_code")
 	private String noLoginCode = "";
 	
 	/**
 	 * 是否被solr索引(冗余字段)
 	 */
+	@Column("is_solr_index")
 	private boolean isSolrIndex;
 	
 	/**
 	 * 是否是管理员(冗余字段)
 	 */
+	@Column("is_admin")
 	private boolean isAdmin;
 	
 	/**
 	 * 所绑定的微信用户的名称
 	 */
+	@Column("wechat_user_name")
 	private String wechatUserName;
 	
 	/**

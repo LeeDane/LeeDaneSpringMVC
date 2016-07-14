@@ -54,9 +54,9 @@ public class CartTest extends BaseTest {
 		if(!StringUtil.isNull(adminId)){
 			aid = Integer.parseInt(adminId);
 		}
-		UserBean user = userService.loadById(aid);
+		UserBean user = userService.findById(aid);
 		CartBean bean = new CartBean();
-		bean.setCreateUser(user);
+		bean.setCreateUserId(user.getId());
 		bean.setCreateTime(new Date());
 		
 		List<CartDetailsBean> ls = new ArrayList<CartDetailsBean>();
@@ -71,7 +71,7 @@ public class CartTest extends BaseTest {
 		details1.setPrice(1099f);
 		details1.setTotalPrice(2198f);
 		details1.setCart(bean);
-		details1.setProduct(productMapper.findById(1));
+		details1.setProduct(productMapper.findById(ProductBean.class, 1));
 		ls.add(details1);
 		
 		CartDetailsBean details2 = new CartDetailsBean();
@@ -86,7 +86,7 @@ public class CartTest extends BaseTest {
 		details2.setTotalPrice(3998f);
 		details2.setCart(bean);
 		ls.add(details2);
-		details2.setProduct(productMapper.findById(2));
+		details2.setProduct(productMapper.findById(ProductBean.class, 2));
 		bean.setDetails(ls);
 		cartMapper.save(bean);
 	}	
@@ -101,6 +101,6 @@ public class CartTest extends BaseTest {
 	
 	@Test
 	public void loadById(){
-		cartMapper.findById(1);
+		cartMapper.findById(CartBean.class, 1);
 	}
 }

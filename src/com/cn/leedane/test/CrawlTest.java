@@ -16,6 +16,7 @@ import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cn.leedane.utils.EnumUtil;
 import com.cn.leedane.utils.SpringUtil;
@@ -24,6 +25,7 @@ import com.cn.leedane.cache.SystemCache;
 import com.cn.leedane.crawl.SanwenNet;
 import com.cn.leedane.crawl.Wangyi;
 import com.cn.leedane.crawl.WangyiNews;
+import com.cn.leedane.handler.UserHandler;
 import com.cn.leedane.mapper.CrawlMapper;
 import com.cn.leedane.model.BlogBean;
 import com.cn.leedane.model.CrawlBean;
@@ -46,6 +48,9 @@ public class CrawlTest extends BaseTest {
 	
 	@Resource
 	private UserService<UserBean> userService;
+	
+	@Autowired
+	private UserHandler userHandler;
 	
 	/**
 	 * 系统级别的缓存对象
@@ -82,7 +87,7 @@ public class CrawlTest extends BaseTest {
 			aid = Integer.parseInt(adminId);
 		}
 		//获得用户
-		UserBean user = userService.loadById(aid);
+		UserBean user = userService.findById(aid);
 		//ExecutorService threadPool = Executors.newFixedThreadPool(5);
 		List<CrawlBean> beans = crawlMapper.findAllNotCrawl(0, EnumUtil.WebCrawlType.网易新闻.value);
 		for(CrawlBean bean: beans){
@@ -99,7 +104,7 @@ public class CrawlTest extends BaseTest {
 					blog.setTitle(wangyi.getTitle());
 					blog.setContent(wangyi.getContent());
 					//optionService.loadById(1);
-					blog.setCreateUser(user);
+					blog.setCreateUserId(user.getId());
 					//operateLogService.loadById(1);
 					blog.setCreateTime(new Date());
 					blog.setSource(EnumUtil.WebCrawlType.网易新闻.value);
@@ -151,7 +156,7 @@ public class CrawlTest extends BaseTest {
 		//文章内容一般很大，索引选择分词+索引，网上说一般不存储，可是不存储的话就显示不了这些内容
 		Field f_content = new TextField("content", StringUtil.changeNotNull(blog.getContent()), Store.YES);
 		//作者名应该保持完整索引，不需要分词。可以存储
-		Field f_account = new StringField("account", StringUtil.changeNotNull(blog.getCreateUser().getAccount()), Store.YES);
+		Field f_account = new StringField("account", StringUtil.changeNotNull(userHandler.getUserName(blog.getCreateUserId())), Store.YES);
 		//来源应该保持完整索引，不需要分词。可以存储
 		Field f_source = new StringField("source", StringUtil.changeNotNull(blog.getSource()), Store.YES);			
 		//来自应该保持完整索引，不需要分词。可以存储
@@ -230,7 +235,7 @@ public class CrawlTest extends BaseTest {
 				aid = Integer.parseInt(adminId);
 			}
 			//获得用户
-			UserBean user = userService.loadById(aid);
+			UserBean user = userService.findById(aid);
 			//ExecutorService threadPool = Executors.newFixedThreadPool(5);
 			List<CrawlBean> beans = crawlMapper.findAllNotCrawl(0,EnumUtil.WebCrawlType.散文网.value);
 			for(CrawlBean bean: beans){
@@ -250,7 +255,7 @@ public class CrawlTest extends BaseTest {
 								BlogBean blog = new BlogBean();
 								blog.setTitle(title);
 								blog.setContent(content);
-								blog.setCreateUser(user);
+								blog.setCreateUserId(user.getId());
 								blog.setCreateTime(new Date());
 								blog.setSource(EnumUtil.WebCrawlType.散文网.value);
 								blog.setFroms("Android客户端");

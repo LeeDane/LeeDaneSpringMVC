@@ -103,7 +103,7 @@ public class FilePathServiceImpl implements FilePathService<FilePathBean> {
 		if(!StringUtil.isNull(sourcePath)){
 			filePathBean = new FilePathBean();
 			filePathBean.setCreateTime(new Date());
-			filePathBean.setCreateUser(user);
+			filePathBean.setCreateUserId(user.getId());
 			filePathBean.setOrder(order);
 			filePathBean.setPath(sourcePath);
 			filePathBean.setSize(ConstantsUtil.DEFAULT_PIC_SIZE);//source
@@ -411,7 +411,7 @@ public class FilePathServiceImpl implements FilePathService<FilePathBean> {
 			//保存文件
 			filePathBean = new FilePathBean();
 			filePathBean.setCreateTime(new Date());
-			filePathBean.setCreateUser(user);
+			filePathBean.setCreateUserId(user.getId());
 			filePathBean.setOrder(order);
 			filePathBean.setPath(fileName);
 			filePathBean.setSize("source");

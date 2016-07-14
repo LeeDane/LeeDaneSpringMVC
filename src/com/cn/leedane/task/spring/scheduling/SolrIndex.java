@@ -194,7 +194,7 @@ public class SolrIndex extends BaseScheduling{
 				document.addField("bdigest", blog.getDigest());
 				server.add(document);
 				server.commit();
-				BlogBean updateBlog = blogMapper.findById(blog.getId());
+				BlogBean updateBlog = blogMapper.findById(BlogBean.class, blog.getId());
 				updateBlog.setSolrIndex(true);
 				blogMapper.update(updateBlog);
 			}else if(tempId ==2){
@@ -203,7 +203,7 @@ public class SolrIndex extends BaseScheduling{
 				document.addField("mcontent", mood.getContent());
 				server.add(document);
 				server.commit();
-				MoodBean updateMood = moodMapper.findById(mood.getId());
+				MoodBean updateMood = moodMapper.findById(MoodBean.class, mood.getId());
 				updateMood.setSolrIndex(true);
 				moodMapper.update(updateMood);
 			}else if(tempId ==3){

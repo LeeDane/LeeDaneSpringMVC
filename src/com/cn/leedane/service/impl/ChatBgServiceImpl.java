@@ -177,7 +177,7 @@ public class ChatBgServiceImpl implements ChatBgService<ChatBgBean> {
 		ChatBgBean chatBgBean = new ChatBgBean();
 		chatBgBean.setDesc(desc);
 		chatBgBean.setCreateTime(new Date());
-		chatBgBean.setCreateUser(user);
+		chatBgBean.setCreateUserId(user.getId());
 		chatBgBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		chatBgBean.setPath(path);
 		chatBgBean.setType(type);
@@ -206,13 +206,13 @@ public class ChatBgServiceImpl implements ChatBgService<ChatBgBean> {
 		int cid = JsonUtil.getIntValue(jo, "cid", 0); //聊天背景的ID
 		
 		ChatBgBean chatBg = null;
-		if(cid < 1 || (chatBg = chatBgMapper.findById(cid)) == null){
+		if(cid < 1 || (chatBg = chatBgMapper.findById(ChatBgBean.class, cid)) == null){
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.操作对象不存在.value));
 			message.put("responseCode", EnumUtil.ResponseCode.操作对象不存在.value);
 			return message;
 		}
 		
-		if(chatBg.getCreateUser().getId() == user.getId()){
+		if(chatBg.getCreateUserId() == user.getId()){
 			message.put("message", EnumUtil.getResponseValue(EnumUtil.ResponseCode.自己上传的聊天背景资源.value));
 			message.put("isSuccess", true);
 			return message;
@@ -232,7 +232,7 @@ public class ChatBgServiceImpl implements ChatBgService<ChatBgBean> {
 				ChatBgUserBean t = new ChatBgUserBean();
 				t.setChatBgTableId(chatBg.getId());
 				t.setCreateTime(new Date());
-				t.setCreateUser(user);
+				t.setCreateUserId(user.getId());
 				t.setStatus(ConstantsUtil.STATUS_NORMAL);
 				result = chatBgUserMapper.save(t) > 0;
 				if(chatBg.getType() == 0){
@@ -258,7 +258,7 @@ public class ChatBgServiceImpl implements ChatBgService<ChatBgBean> {
 					ChatBgUserBean t = new ChatBgUserBean();
 					t.setChatBgTableId(chatBg.getId());
 					t.setCreateTime(new Date());
-					t.setCreateUser(user);
+					t.setCreateUserId(user.getId());
 					t.setStatus(ConstantsUtil.STATUS_NORMAL);
 					result = chatBgUserMapper.save(t) > 0;
 					if(chatBg.getType() == 0){
@@ -301,7 +301,7 @@ public class ChatBgServiceImpl implements ChatBgService<ChatBgBean> {
 		scoreBean.setTotalScore(scoreService.getTotalScore(user.getId()) + score);
 		scoreBean.setScore(score);
 		scoreBean.setCreateTime(d);
-		scoreBean.setCreateUser(user);
+		scoreBean.setCreateUserId(user.getId());
 		scoreBean.setDesc("扣除下载聊天背景积分");
 		scoreBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		scoreBean.setTableId(chatBg.getId());
@@ -310,10 +310,10 @@ public class ChatBgServiceImpl implements ChatBgService<ChatBgBean> {
 		if(result){
 			//增加用户下载资源积分
 			ScoreBean scoreBean1 = new ScoreBean();
-			scoreBean1.setTotalScore(scoreService.getTotalScore(chatBg.getCreateUser().getId()) + bgScore);
+			scoreBean1.setTotalScore(scoreService.getTotalScore(chatBg.getCreateUserId()) + bgScore);
 			scoreBean1.setScore(bgScore);
 			scoreBean1.setCreateTime(d);
-			scoreBean1.setCreateUser(chatBg.getCreateUser());
+			scoreBean1.setCreateUserId(chatBg.getCreateUserId());
 			scoreBean1.setDesc("聊天背景资源被下载奖励");
 			scoreBean1.setStatus(ConstantsUtil.STATUS_NORMAL);
 			scoreBean1.setTableId(chatBg.getId());
@@ -323,7 +323,7 @@ public class ChatBgServiceImpl implements ChatBgService<ChatBgBean> {
 			if(result){
 				//发送通知给相应的用户
 				Set<Integer> ids = new HashSet<Integer>();
-				ids.add(chatBg.getCreateUser().getId());
+				ids.add(chatBg.getCreateUserId());
 				String content = user.getAccount() +"下载您的聊天背景资源，您获得"+bgScore +"积分";
 				notificationHandler.sendNotificationByIds(false, user, ids, content, NotificationType.通知, DataTableType.积分.value, scoreBean1.getId(), null);
 			}

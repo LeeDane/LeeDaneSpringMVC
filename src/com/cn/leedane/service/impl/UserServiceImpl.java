@@ -58,7 +58,7 @@ import com.cn.leedane.service.UserService;
 
 @Service("userService")
 @Transactional  //此处不再进行创建SqlSession和提交事务，都已交由spring去管理了。
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService<UserBean> {
 	
 	Logger logger = Logger.getLogger(getClass());
 	
@@ -100,8 +100,8 @@ public class UserServiceImpl implements UserService {
 
 	
 	@Override
-	public UserBean loadById(int Uid) {
-		return userMapper.loadById(Uid);
+	public UserBean findById(int uid) {
+		return userMapper.findById(UserBean.class, uid);
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public class UserServiceImpl implements UserService {
 		scoreBean.setTotalScore(score);
 		scoreBean.setScore(score);
 		scoreBean.setCreateTime(new Date());
-		scoreBean.setCreateUser(u);
+		scoreBean.setCreateUserId(u.getId());
 		scoreBean.setDesc("用户注册");
 		scoreBean.setStatus(ConstantsUtil.STATUS_NORMAL);
 		scoreBean.setTableId(u.getId());
@@ -885,11 +885,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Map<String, Object>> executeSQL(String sql, Object... params) {
 		return userMapper.executeSQL(sql, params);
-	}
-
-	@Override
-	public UserBean findById(int id) {
-		return userMapper.findById(id);
 	}
 
 	@Override

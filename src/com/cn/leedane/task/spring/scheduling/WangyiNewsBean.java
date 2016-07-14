@@ -79,7 +79,7 @@ public class WangyiNewsBean {
 		//System.out.println(DateUtil.getSystemCurrentTime("yyyy-MM-dd HH:mm:ss") + ":Wangyi:deal()");
 		try {
 			//获得用户
-			UserBean user = userService.loadById(1);
+			UserBean user = userService.findById(1);
 			List<CrawlBean> beans = crawlMapper.findAllNotCrawl(0, EnumUtil.WebCrawlType.网易新闻.value);
 			for(CrawlBean bean: beans){
 				Pattern p=Pattern.compile("http://[a-z]+.163.com/[0-9]{2}/[0-9]{4}/[0-9]{2}/*");//找网易新闻的子站
@@ -97,7 +97,7 @@ public class WangyiNewsBean {
 						BlogBean blog = new BlogBean();
 						blog.setTitle(wangyi.getTitle().trim());
 						blog.setContent(wangyi.getContent());
-						blog.setCreateUser(user);
+						blog.setCreateUserId(user.getId());
 						blog.setCreateTime(new Date());
 						blog.setSource(EnumUtil.WebCrawlType.网易新闻.value);
 						blog.setFroms("爬虫抓取");
